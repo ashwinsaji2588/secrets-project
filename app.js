@@ -20,7 +20,7 @@ const userSchema=new mongoose.Schema({
   email:String,
   password:String
 });
-//added this for encryption
+//added this for encryption using mongooose encryption
 userSchema.plugin(encrypt,{secret:process.env.SECRET,encryptedFields:["password"]});
 ////////////////////////////////////////////
 const User=new mongoose.model("User",userSchema);
@@ -69,6 +69,10 @@ app.post("/login",function(req,res){
     }
   })
 });
+
+app.get("/logout",function(req,res){
+  res.render("login");
+})
 
 app.listen(3000,function(){
   console.log("Server started on port 3000");
